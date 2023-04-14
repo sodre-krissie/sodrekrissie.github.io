@@ -1,0 +1,137 @@
+<style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Sarala:wght@400;700&display=swap');
+    body{
+        margin: 0;
+        text-decoration: none;
+        background-color: #5D5A58;
+        color: #E0E0E0;
+        font-family: 'Sarala', sans-serif;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #imgFuelStation{
+        width: 35%;
+        display: block;
+        margin: auto;
+    }
+    .inputCalculadora{
+        margin: 10 15%;
+        padding: 1%;
+        text-align: center;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 5px 5px 10px 3px #424242;
+    }
+    .buttonCalculadora{
+        margin: 5 15%;
+        padding: 1%;
+        background-color: #4C4A48;
+        font-size: 20px;
+        color: #E0E0E0;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 5px 5px 10px 3px #424242; 
+        cursor: pointer;       
+    }
+    .resultadoCalculado{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+</style>
+
+<head>
+    <title>KS | Calculadora de Combustível</title>
+</head>
+<body>
+    <img src="img/fuel-station-animate.svg" id="imgFuelStation">
+    <h1>Insira abaixo as informações:</h1>
+    <h2>Capacidade em litros do tanque do seu carro:</h2>
+    <input type="number" class="inputCalculadora" id="capacidadeTanque">
+    <h2>Consumo do seu carro (quantos km faz por litro?):</h2>
+    <input type="number" class="inputCalculadora" id="consumoCarro">
+    <h2>Preço do litro gasolina em Pesos Argentinos &#x1F1E6;&#x1F1F7;:</h2>
+    <input type="number" value="198.90" class="inputCalculadora" id="precoGasolinaPesos">
+    <button type="submit" class="buttonCalculadora" onclick="calcular()">Calcular</button>
+    <table id="resultadoCalculado">
+        <a id="resultadoCalculado25"></a>
+        <a id="resultadoCalculado50"></a>
+        <a id="resultadoCalculado75"></a>
+        <a id="resultadoCalculadoCheio"></a>        
+    </table>
+    
+</body>
+
+<script>
+
+    function calcular(){
+
+        let capacidadeTanque = document.getElementById("capacidadeTanque");
+            capacidadeTanque = capacidadeTanque.value;
+            capacidadeTanque = parseFloat(capacidadeTanque);
+        let consumoCarro = document.getElementById("consumoCarro");
+            consumoCarro = consumoCarro.value;
+            consumoCarro = parseFloat(consumoCarro);
+        let autonomiaCarro = capacidadeTanque * consumoCarro;
+
+        let precoGasolinaPesos = document.getElementById("precoGasolinaPesos");
+            precoGasolinaPesos = precoGasolinaPesos.value;
+            precoGasolinaPesos = parseFloat(precoGasolinaPesos);
+
+
+        //Índices do tanque de combustível em litros:
+        let tanqueCheio = 1;
+            tanqueCheio = capacidadeTanque * 1;
+        let tanque75 = .75;
+            tanque75 = capacidadeTanque * .75;
+        let tanque50 = .50;
+            tanque50 = capacidadeTanque * .5;
+        let tanque25 = .25;
+            tanque25 = capacidadeTanque * .25;
+
+
+        //Cálculo
+        /*let precoGasolinaPesos = 168.90;
+            precoGasolinaPesos = precoGasolinaPesos.toFixed(2);*/
+
+        let precoTanqueCheio = tanqueCheio * precoGasolinaPesos;
+            precoTanqueCheio = precoTanqueCheio.toFixed(2);
+
+        let precoTanque75 = tanque75 * precoGasolinaPesos;
+            precoTanque75 = precoTanque75.toFixed(2);
+
+        let precoTanque50 = tanque50 * precoGasolinaPesos;
+            precoTanque50 = precoTanque50.toFixed(2);
+
+        let precoTanque25 = tanque25 * precoGasolinaPesos;
+            precoTanque25 = precoTanque25.toFixed(2);
+
+        //Respostas
+        //Para 25% (1/4 do tanque)
+        var resultadoCalculado25Import = document.getElementById("resultadoCalculado25");
+        var resultadoCalculado25 = "Se você abastecer o tanque em 25% ("+tanque25+" litros), você irá gastar: $ " +precoTanque25;
+        resultadoCalculado25Import.innerHTML = resultadoCalculado25;
+
+        //Para 50% (1/2 do tanque)
+        var resultadoCalculado50Import = document.getElementById("resultadoCalculado50");
+        var resultadoCalculado50 = "Se você abastecer o tanque em 50% ("+tanque50+" litros), você irá gastar: $ " +precoTanque50;
+        resultadoCalculado50Import.innerHTML = resultadoCalculado50;
+
+        //Para 75% (3/4 do tanque)
+        var resultadoCalculado75Import = document.getElementById("resultadoCalculado75");
+        var resultadoCalculado75 = "Se você abastecer o tanque em 70% ("+tanque75+" litros), você irá gastar: $ " +precoTanque75;
+        resultadoCalculado75Import.innerHTML = resultadoCalculado75;
+
+        //Para 100% (1 tanque)
+        var resultadoCalculadoCheioImport = document.getElementById("resultadoCalculadoCheio");
+        var resultadoCalculadoCheio = "Se você abastecer o tanque em 100% ("+tanqueCheio+" litros), você irá gastar: $ " +precoTanqueCheio+"\nCom base no seu consumo, com o tanque cheio você deve rodar: "+autonomiaCarro+" km.";
+        resultadoCalculadoCheioImport.innerHTML = resultadoCalculadoCheio;
+
+        console.log("Entre em contato para ter uma solução feita para você: %csodre.krissie@gmail.com","color: gold; background-color: red;");
+    }
+
+</script>
